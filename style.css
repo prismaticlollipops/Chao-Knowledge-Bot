@@ -1,0 +1,40 @@
+#submit-container {
+    display: block;
+}
+
+#submit-container > button {
+    background: #00cccc;
+}
+
+#submit-container > button:hover {
+    background: #009999;
+}
+
+.chao, a {
+    color: #00cccc;
+}
+
+.chao:hover, a:hover {
+    color: #009999;
+}
+
+img.chao-gif{
+    position: relative;
+    width: 90px;
+    height: auto;
+    top: -10px;
+  }
+
+.chao-header {
+      display: flex;
+      align-items: center;
+  }
+
+  .chao-gif {
+      margin-right: 10px;
+
+  }
+
+h1 {
+    text-align:center;
+}

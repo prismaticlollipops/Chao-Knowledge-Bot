@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+
+    <!-- add bootstrap (preset colour and font theme) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom style.css -->
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+    <title>chao ／(＞×＜)＼</title>
+    <py-env>
+        - asyncio
+        - paths:
+            - scripts/chao.py
+    </py-env>
+    
+</head>
+
+<!-- front end process of the website-->
+<body>
+    <div class="container">
+        <div class="chao-header">
+            <h1 class="display-1 fw-bolder chao">chao</h1>
+            <img class="chao-gif" src="chao.gif" alt="chao from sonic the hedgehog sweeping the floor">
+        </div>
+        <p class="lead">hi i'm chao - your personal know-it-all at your service!</p>
+        <section id="input">
+            <py-inputbox id="topic">
+            </py-inputbox>
+            <small class="form-text text-muted">need ideas? try one of these: "four leaf clover", "summer", "sonic the hedgehog", "red panda"</small>
+            
+            <py-button id="submit" label="Summarize" class="mt-2">
+                import asyncio
+                from pyodide import create_proxy
+                from chao import get_summary
+
+                @create_proxy
+                async def on_click(evt):
+                    url = document.getElementById("topic").value
+                    result = await get_summary(url)
+                    pyscript.write("summary", result)
+            </py-button>
+
+
+    <section id="summary" class="mt-4">
+        <h6>enter a keyword or a topic in the field above and let chao 📰 retrieve a summary 🔎 from Wikipedia instantly!</h6>
+    </section>
+    <button id="copy" class="btn btn-warning">Copy to 📋 Clipboard</button>
+
+    </div>
+
+    <script>
+        document.getElementById("topic").focus()
+
+        function copySummary(){
+            let summaryText = document.getElementById("summary").innerText
+
+            navigator.clipboard.writeText(summaryText).then(function(){
+                console.log("copied to clipboard!")
+            }, 
+                function(err){
+                    console.log("Could not copy text")
+                }
+            )
+        }
+
+        let copyButton = document.getElementById("copy");
+        copyButton.addEventListener("click", copySummary);
+
+    </script>
+
+</body>
+</html>
